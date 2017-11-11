@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'benchmark'
 require 'bundler/setup'
 require 'kociemba'
 require 'pry'
@@ -14,16 +15,15 @@ SCRAMBLES = {
   'UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB' => "R L U2 R L' B2 U2 R2 F2 L2 D2 L2 F2"
 }
 
-def test_solver
+Kociemba::Cache.load_all
+
+def benchmark
   solver = Kociemba::Solver.new
-  SCRAMBLES.each do |cube, solution|
-    puts "Testing #{cube}...\n"
-    solver.reset
-    res = solver.solve(cube)
-    puts "Solution(#{solution.split(' ').length}): #{solution}"
-    puts "Result(#{res.split(' ').length}):   #{res}"
-    puts "Match?: #{res == solution}"
-    puts "\n"
+  Benchmark.bm do |x|
+    SCRAMBLES.each do |cube, _solution|
+      solver.reset
+      x.report(cube) { solver.solve(cube) }
+    end
   end
 end
 
