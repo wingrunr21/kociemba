@@ -4,6 +4,22 @@ require 'kociemba/move_cube'
 
 module Kociemba
   module Cache
+    def self.load_all
+      flip_move
+      fr_to_br_move
+      merge_ur_to_ul_and_ub_to_df
+      parity_move
+      slice_flip_prune
+      slice_twist_prune
+      slice_ur_to_df_parity_prune
+      slice_urf_to_dlf_parity_prune
+      twist_move
+      ub_to_df_move
+      ur_to_df_move
+      ur_to_ul_move
+      urf_to_dlf_move
+    end
+
     class BaseCache
       N_SLICE1 = 495  # 12 choose 4 possible positions of FR,FL,BL,BR edges
       N_SLICE2 = 24   # 4! permutations of FR,FL,BL,BR edges in phase2
