@@ -29,6 +29,28 @@ module Kociemba
 
     # Return the cube facelet representation
     def to_face_cube
+      fc = FaceCube.new
+
+      CORNERS.length.times do |i|
+        j = corner_permutation[i]
+        ori = corner_orientation[i]
+
+        CORNER_SIZE.times do |n|
+          ord = Facelet.for(i, (n + ori) % 3, type: :corner).ord
+          fc.colors[ord] = FaceCube::CORNER_COLORS[j][n]
+        end
+      end
+
+      EDGES.length.times do |i|
+        j = edge_permutation[i]
+        ori = edge_orientation[i]
+        EDGE_SIZE.times do |n|
+          ord = Facelet.for(i, (n + ori) % 2, type: :edge).ord
+          fc.colors[ord] = FaceCube::EDGE_COLORS[j][n]
+        end
+      end
+
+      fc
     end
 
     # TODO more ruby
