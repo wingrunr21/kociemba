@@ -18,14 +18,13 @@ module Kociemba
     attr_reader :colors
 
     def initialize(cube = DEFAULT_CUBE)
-      @cube = cube
       @colors = cube.upcase.scan(/./).map do |facelet|
         Color.new(facelet.to_sym)
       end
     end
 
     def to_s
-      @cube
+      colors.join
     end
 
     def to_cubie_cube
