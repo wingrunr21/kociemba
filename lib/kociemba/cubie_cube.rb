@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'kociemba/corner'
 require 'kociemba/edge'
 

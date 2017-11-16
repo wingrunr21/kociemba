@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kociemba
   module Corner
     CORNER_SIZE = 3

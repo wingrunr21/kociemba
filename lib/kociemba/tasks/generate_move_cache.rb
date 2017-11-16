@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake' unless defined? Rake
 require 'kociemba/cache'
 

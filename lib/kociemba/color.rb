@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kociemba
   class Color
     COLORS = %i(U R F D L B).map.with_index { |c, i| [c, i] }.to_h

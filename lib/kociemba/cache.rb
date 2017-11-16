@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'kociemba/cubie_cube'
 require 'json'
 require 'kociemba/move_cube'

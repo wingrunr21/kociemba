@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kociemba
   module Cache
     def self.parity_move

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'kociemba/cache/urf_to_dlf_move'
 
 module Kociemba

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kociemba
   class Solver
     SIZE = 31
