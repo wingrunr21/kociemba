@@ -23,7 +23,7 @@ module Kociemba
           end
         end
 
-        File.open(filename, 'w') {|f| Marshal.dump(urf_to_dlf_move, f)}
+        File.open(filename, 'w') {|f| JSON.dump(urf_to_dlf_move, f)}
         urf_to_dlf_move
       end
     end

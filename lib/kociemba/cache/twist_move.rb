@@ -23,7 +23,7 @@ module Kociemba
           end
         end
 
-        File.open(filename, 'w') {|f| Marshal.dump(twist_move, f)}
+        File.open(filename, 'w') {|f| JSON.dump(twist_move, f)}
         twist_move
       end
     end

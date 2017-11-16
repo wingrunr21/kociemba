@@ -23,7 +23,7 @@ module Kociemba
           end
         end
 
-        File.open(filename, 'w') {|f| Marshal.dump(fr_to_br_move, f)}
+        File.open(filename, 'w') {|f| JSON.dump(fr_to_br_move, f)}
         fr_to_br_move
       end
     end

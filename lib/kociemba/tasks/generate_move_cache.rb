@@ -11,16 +11,24 @@ module Kociemba
       namespace :kociemba do
         desc 'Generate move cache files'
         task :generate_cache do
-          # %i(TwistMove FlipMove FrToBrMove UrfToDlfMove).each do |konst|
-          #   move = Kociemba::MoveCache.const_get(konst)
-          #   puts "Generating #{konst} cache..."
-          #   move.dump
-          # end
-        end
-
-        desc 'Remove all cache files'
-        task :clear_cache do
-          # Kociemba::Cache::
+        %i(
+          FlipMove
+          FrToBrMove
+          TwistMove
+          UbToDfMove
+          UrToDfMove
+          UrToUlMove
+          UrfToDlfMove
+          MergeUrToUlAndUbToDf
+          SliceFlipPrune
+          SliceTwistPrune
+          SliceUrToDfParityPrune
+          SliceUrfToDlfParityPrune
+        ).each do |k|
+            konst = Kociemba::Cache.const_get(k)
+            puts "Dumping #{k}..."
+            konst.dump
+          end
         end
       end
     end

@@ -15,9 +15,7 @@ module Kociemba
         set_pruning(slice_flip_prune, 0, 0)
         done = 1
 
-        puts size
         while done != size
-          puts depth
           size.times do |i|
             flip = i / N_SLICE1
             slice = i % N_SLICE1
@@ -39,7 +37,7 @@ module Kociemba
           depth += 1
         end
 
-        File.open(filename, 'w') {|f| Marshal.dump(slice_flip_prune, f)}
+        File.open(filename, 'w') {|f| JSON.dump(slice_flip_prune, f)}
         slice_flip_prune
       end
     end

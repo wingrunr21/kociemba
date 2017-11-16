@@ -24,7 +24,7 @@ module Kociemba
           end
         end
 
-        File.open(filename, 'w') {|f| Marshal.dump(flip_move, f)}
+        File.open(filename, 'w') {|f| JSON.dump(flip_move, f)}
         flip_move
       end
     end

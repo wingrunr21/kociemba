@@ -23,7 +23,7 @@ module Kociemba
           end
         end
 
-        File.open(filename, 'w') {|f| Marshal.dump(merge_ur_to_ul_and_ub_to_df, f)}
+        File.open(filename, 'w') {|f| JSON.dump(merge_ur_to_ul_and_ub_to_df, f)}
         merge_ur_to_ul_and_ub_to_df
       end
 

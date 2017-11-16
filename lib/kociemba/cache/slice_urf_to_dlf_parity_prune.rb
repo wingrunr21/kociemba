@@ -46,7 +46,7 @@ module Kociemba
           depth += 1
         end
 
-        File.open(filename, 'w') {|f| Marshal.dump(slice_urf_to_dlf_parity_prune, f)}
+        File.open(filename, 'w') {|f| JSON.dump(slice_urf_to_dlf_parity_prune, f)}
         slice_urf_to_dlf_parity_prune
       end
     end
