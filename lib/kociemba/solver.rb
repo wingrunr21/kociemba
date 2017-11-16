@@ -47,7 +47,7 @@ module Kociemba
       s.strip
     end
 
-    def solve(cube, max_depth: 21, time_out: 120)
+    def solve(cube, max_depth: 20, time_out: 120)
       fc = FaceCube.new(cube)
       cc = fc.to_cubie_cube
 
@@ -57,8 +57,8 @@ module Kociemba
 
       # FIXME: this can be made better
       # Initialization
-      move_power[0] = 0
-      move_axis[0] = 0
+      move_power[0] = 0 # this tracks modifiers for a given face move
+      move_axis[0] = 0 # this tracks the various face movements
       flip[0] = c.flip
       twist[0] = c.twist
       parity[0] = c.parity
@@ -68,9 +68,8 @@ module Kociemba
       ur_to_ul[0] = c.ur_to_ul
       ub_to_df[0] = c.ub_to_df
 
-      min_dist_phase1[1] = 1 # else failure for depth=1, n=0. TODO understand this
+      min_dist_phase1[1] = 1 # else failure for depth=1, n=0
 
-      mv = 0
       n = 0
       busy = false
       depth_phase1 = 1
@@ -129,17 +128,13 @@ module Kociemba
 
         # Compute new coordinates and new min_dist_phase1
         mv = 3 * move_axis[n] + move_power[n] - 1
-        begin
-          flip[n + 1] = Cache.flip_move[flip[n]][mv]
-          twist[n + 1] = Cache.twist_move[twist[n]][mv]
-          slice[n + 1] = Cache.fr_to_br_move[slice[n] * 24][mv] / 24
-        rescue
-          binding.pry
-        end
+        flip[n + 1] = Cache.flip_move[flip[n]][mv]
+        twist[n + 1] = Cache.twist_move[twist[n]][mv]
+        slice[n + 1] = Cache.fr_to_br_move[slice[n] * 24][mv] / 24
 
         min_dist_phase1[n + 1] = [
-         Cache::BasePrune.get_pruning(Cache.slice_flip_prune, Cache::BaseCache::N_SLICE1 * flip[n + 1] + slice[n + 1]),
-         Cache::BasePrune.get_pruning(Cache.slice_twist_prune, Cache::BaseCache::N_SLICE1 * twist[n + 1] + slice[n + 1])
+          Cache::BasePrune.get_pruning(Cache.slice_flip_prune, Cache::BaseCache::N_SLICE1 * flip[n + 1] + slice[n + 1]),
+          Cache::BasePrune.get_pruning(Cache.slice_twist_prune, Cache::BaseCache::N_SLICE1 * twist[n + 1] + slice[n + 1])
         ].max
         #####
 
